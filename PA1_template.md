@@ -1,15 +1,11 @@
----
-title: "Reproducible Research: Peer Assessment 1"
-output: 
-  html_document:
-    keep_md: true
----
+# Reproducible Research: Peer Assessment 1
 *author: Sergey Medintsev*  
 *date:   14.08.2015*
 
 
 ## Loading and preprocessing the data
-```{r echo = TRUE}
+
+```r
 data          <- read.csv('activity.csv')
 data$date     <- as.Date(data$date)
 data.noNA     <- na.omit(data)
@@ -17,7 +13,8 @@ data.noNA     <- na.omit(data)
 
 
 ## What is mean total number of steps taken per day?
-```{r echo = TRUE}
+
+```r
 data.aggr.days     <- aggregate(x   = data.noNA$steps,
                                 by  = list(data.noNA$date),
                                 FUN = sum)
@@ -26,30 +23,62 @@ hist(x    = data.aggr.days$x,
      main = 'Histogram of total number of steps',
      sub  = 'without NAs',
      breaks = 11)
+```
+
+![](PA1_template_files/figure-html/unnamed-chunk-2-1.png) 
+
+```r
 mean(data.aggr.days$x)
+```
+
+```
+## [1] 10766.19
+```
+
+```r
 median(data.aggr.days$x)
+```
+
+```
+## [1] 10765
 ```
 
 
 ## What is the average daily activity pattern?
-```{r echo = TRUE}
+
+```r
 data.aggr.intervals     <- aggregate(x    = data.noNA$steps,
                                      by   = list(data.noNA$interval),
                                      FUN  = mean)
 names(data.aggr.intervals)[1] <- "interval"
 plot(data.aggr.intervals, type = "l", ylab = 'number of average steps')
+```
+
+![](PA1_template_files/figure-html/unnamed-chunk-3-1.png) 
+
+```r
 data.aggr.intervals$interval[which.max(data.aggr.intervals$x)]
+```
+
+```
+## [1] 835
 ```
 
 
 ## Imputing missing values
-```{r echo = TRUE}
+
+```r
 sum(is.na(data))
+```
+
+```
+## [1] 2304
 ```
 
 We are going to impute these missing values using average steps by interval.
 
-```{r echo = TRUE}
+
+```r
 data.repaired <- merge(x      = data,
                        y      = data.aggr.intervals,
                        by     = "interval",
@@ -66,15 +95,31 @@ hist(x    = data.aggr.days.repaired$x,
      main = 'Histogram of total number of steps',
      sub  = 'with repaired values',
      breaks = 11)
+```
 
+![](PA1_template_files/figure-html/unnamed-chunk-5-1.png) 
+
+```r
 mean(data.aggr.days.repaired$x)
+```
+
+```
+## [1] 10749.77
+```
+
+```r
 median(data.aggr.days.repaired$x)
+```
+
+```
+## [1] 10641
 ```
 
 The histogram overall is very similar to the one we generated earlier, execept that we have far less days falling into the zero steps bucket. This makes sense because we imputed NA with interval average, which shifted mean up quite a bit while kept median roughly the same.
 
 ## Are there differences in activity patterns between weekdays and weekends?
-```{r echo = TRUE}
+
+```r
 data.repaired$weekday <- weekdays(data.repaired$date, abbreviate = TRUE)
 data.repaired$weekday <- ifelse(data.repaired$weekday == 'Сб' | data.repaired$weekday == 'Вс', 1, 0)
 data.repaired$weekday <- factor(data.repaired$weekday, labels = c("Weekend", "Weekday"))
@@ -90,3 +135,5 @@ ggplot(data.aggr.weekdays.repaired, aes(interval, steps)) +
   labs(x = "Interval",
        y = "Number of Average Steps")
 ```
+
+![](PA1_template_files/figure-html/unnamed-chunk-6-1.png) 

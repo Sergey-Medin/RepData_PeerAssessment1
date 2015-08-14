@@ -1,0 +1,22 @@
+{
+    "contents" : "",
+    "created" : 1439537279993.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "3BF23A9A",
+    "lastKnownWriteTime" : 7741240722073845761,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "caption" : "data.repaired",
+        "contentUrl" : "content?title=data.repaired&file=2e8473bdbdca43479d70a3c4fa7449a5.htm",
+        "displayedObservations" : "1000",
+        "displayedVariables" : 5,
+        "totalObservations" : "17568",
+        "variables" : "7"
+    },
+    "source_on_save" : false,
+    "type" : "r_dataframe"
+}

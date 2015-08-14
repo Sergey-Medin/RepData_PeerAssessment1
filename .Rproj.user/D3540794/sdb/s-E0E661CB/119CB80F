@@ -1,0 +1,22 @@
+{
+    "contents" : "",
+    "created" : 1439540094226.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "119CB80F",
+    "lastKnownWriteTime" : 13229740524830817,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "caption" : "data.aggr.weekdays.repaired",
+        "contentUrl" : "content?title=data.aggr.weekdays.repaired&file=960acd1ba13241d29bf8020a82a73189.htm",
+        "displayedObservations" : "576",
+        "displayedVariables" : 2,
+        "totalObservations" : "576",
+        "variables" : "3"
+    },
+    "source_on_save" : false,
+    "type" : "r_dataframe"
+}
